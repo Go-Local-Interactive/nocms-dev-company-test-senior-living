@@ -21,7 +21,7 @@ export function GalleryBlock({ title, mediaArray }: BlockProps) {
         {title && (
           <h2
             data-payload-subfield="title"
-            className="font-heading text-3xl sm:text-4xl font-semibold text-text text-center mb-10"
+            className="font-heading text-3xl sm:text-4xl font-semibold text-text text-center mb-10" data-role="heading"
           >
             {title}
           </h2>
@@ -46,7 +46,7 @@ export function GalleryBlock({ title, mediaArray }: BlockProps) {
                 alt={m.alt}
                 loading={i === 0 ? "eager" : "lazy"}
                 className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
-                data-payload-subfield={`mediaArray.${i}`}
+                data-payload-subfield={`mediaArray.${i}`} data-role="media"
               />
             </div>
           ))}

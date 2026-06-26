@@ -134,7 +134,7 @@ export function FloorPlanGridBlock({ title, body, mediaArray }: BlockProps) {
                     src={photoSrc}
                     alt={mediaAlt(photo) || `${plan.name} floor plan`}
                     className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    loading="lazy"
+                    loading="lazy" data-role="media"
                   />
                 ) : (
                   <div
@@ -144,23 +144,23 @@ export function FloorPlanGridBlock({ title, body, mediaArray }: BlockProps) {
                   />
                 )}
                 <div className="p-6">
-                  <h3 className="font-heading text-2xl font-semibold text-text mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-heading text-2xl font-semibold text-text mb-2 group-hover:text-primary transition-colors" data-role="heading-2">
                     {plan.name}
                   </h3>
-                  <p className="font-body text-sm text-muted leading-relaxed mb-3">
+                  <p className="font-body text-sm text-muted leading-relaxed mb-3" data-role="subheading-2">
                     {specsLine}
                   </p>
                   {plan.priceFrom && (
-                    <p className="font-heading text-lg font-bold text-primary mb-4">
+                    <p className="font-heading text-lg font-bold text-primary mb-4" data-role="subheading-3">
                       {plan.priceFrom}
                     </p>
                   )}
                   <span
                     aria-hidden="true"
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all" data-role="text"
                   >
                     View details
-                    <span aria-hidden="true">&rarr;</span>
+                    <span aria-hidden="true" data-role="text-2">&rarr;</span>
                   </span>
                 </div>
               </a>

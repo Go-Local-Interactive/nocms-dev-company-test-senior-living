@@ -83,11 +83,11 @@ export function ExitIntent() {
 
         <h2
           id="exit-intent-heading"
-          className="font-heading text-2xl font-bold text-text text-center"
+          className="font-heading text-2xl font-bold text-text text-center" data-role="heading"
         >
           Wait! Schedule a tour?
         </h2>
-        <p className="mt-2 text-center text-sm text-muted leading-relaxed">
+        <p className="mt-2 text-center text-sm text-muted leading-relaxed" data-role="subheading">
           Take a look at our community before you go. We&apos;ll show you what makes life here special.
         </p>
 
@@ -98,14 +98,14 @@ export function ExitIntent() {
             window.location.href = "/schedule-tour";
           }}
         >
-          <label className="sr-only" htmlFor="exit-intent-name">Name</label>
+          <label className="sr-only" htmlFor="exit-intent-name" data-role="text">Name</label>
           <input
             id="exit-intent-name"
             type="text"
             placeholder="Your name"
             className="rounded-md border-2 border-text/15 bg-white px-4 py-3 text-sm text-text placeholder:text-muted focus:border-primary focus:outline-none transition-colors"
           />
-          <label className="sr-only" htmlFor="exit-intent-email">Email</label>
+          <label className="sr-only" htmlFor="exit-intent-email" data-role="text-2">Email</label>
           <input
             id="exit-intent-email"
             type="email"
@@ -115,7 +115,7 @@ export function ExitIntent() {
           />
           <button
             type="submit"
-            className="rounded-md bg-secondary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-secondary-dark transition-colors"
+            className="rounded-md bg-secondary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-secondary-dark transition-colors" data-role="cta"
           >
             Schedule My Tour
           </button>
@@ -124,7 +124,7 @@ export function ExitIntent() {
         {contactPhone && (
           <a
             href={telHref(contactPhone)}
-            className="mt-5 flex items-center justify-center gap-2 border-t border-text/10 pt-4 text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+            className="mt-5 flex items-center justify-center gap-2 border-t border-text/10 pt-4 text-sm font-semibold text-primary hover:text-primary-dark transition-colors" data-role="text-3"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
             Or call us: {contactPhone}

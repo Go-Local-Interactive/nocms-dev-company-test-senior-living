@@ -112,10 +112,10 @@ export function TimelineBlock({ title, body }: BlockProps) {
                 </span>
                 {/* Content card */}
                 <div className="bg-background rounded-2xl border border-text/5 shadow-sm hover:shadow-md transition-shadow p-6">
-                  <h3 className="font-heading text-xl sm:text-2xl font-semibold text-text mb-2">
+                  <h3 className="font-heading text-xl sm:text-2xl font-semibold text-text mb-2" data-role="heading-2">
                     {step.title}
                   </h3>
-                  <p className="font-body text-base text-muted leading-relaxed">
+                  <p className="font-body text-base text-muted leading-relaxed" data-role="subheading-2">
                     {step.description}
                   </p>
                 </div>

@@ -56,7 +56,7 @@ export function Header() {
           )}
           <a
             href="/schedule-tour"
-            className="inline-flex items-center rounded-md bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-secondary/30 hover:bg-secondary-dark hover:-translate-y-0.5 hover:shadow-md transition-all"
+            className="inline-flex items-center rounded-md bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-secondary/30 hover:bg-secondary-dark hover:-translate-y-0.5 hover:shadow-md transition-all" data-role="cta"
           >
             Schedule a Tour
           </a>
@@ -92,7 +92,7 @@ export function Header() {
                 )}
                 <a
                   href="/schedule-tour"
-                  className="rounded-md bg-secondary px-3 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-secondary-dark transition-colors"
+                  className="rounded-md bg-secondary px-3 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-secondary-dark transition-colors" data-role="cta-2"
                 >
                   Schedule a Tour
                 </a>

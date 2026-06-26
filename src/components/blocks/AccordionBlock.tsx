@@ -116,7 +116,7 @@ export function AccordionBlock({ title, body }: BlockProps) {
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </summary>
-              <p className="px-6 pb-5 font-body text-base text-muted leading-relaxed">
+              <p className="px-6 pb-5 font-body text-base text-muted leading-relaxed" data-role="subheading-2">
                 {item.answer}
               </p>
             </details>

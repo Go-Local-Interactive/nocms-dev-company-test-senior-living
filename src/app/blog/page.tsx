@@ -49,7 +49,7 @@ export default async function BlogIndexPage() {
       <section className="py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {cardPosts.length === 0 ? (
-            <p className="text-muted">No articles yet. Check back soon.</p>
+            <p className="text-muted" data-role="text">No articles yet. Check back soon.</p>
           ) : (
             <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {cardPosts.map((post, idx) => {

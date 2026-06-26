@@ -71,7 +71,7 @@ export function CareLevelCardBlock({ title, body, media }: BlockProps) {
               src={photo}
               alt={mediaAlt(media) || title || "Care level"}
               className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg"
-              loading="eager"
+              loading="eager" data-role="media"
             />
           ) : (
             <div
@@ -122,13 +122,13 @@ export function CareLevelCardBlock({ title, body, media }: BlockProps) {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <a
               href="/schedule-tour"
-              className="inline-flex items-center justify-center bg-accent text-text font-semibold px-8 py-4 rounded-xl text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center justify-center bg-accent text-text font-semibold px-8 py-4 rounded-xl text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all" data-role="cta"
             >
               Schedule a Tour
             </a>
             <a
               href="/living-options"
-              className="inline-flex items-center justify-center border-2 border-text/20 text-text hover:bg-surface font-medium px-8 py-4 rounded-xl text-base transition-all"
+              className="inline-flex items-center justify-center border-2 border-text/20 text-text hover:bg-surface font-medium px-8 py-4 rounded-xl text-base transition-all" data-role="text"
             >
               Explore Living Options
             </a>

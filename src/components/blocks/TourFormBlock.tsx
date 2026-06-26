@@ -92,7 +92,7 @@ export function TourFormBlock({ title, body }: BlockProps) {
             <div>
               <label
                 htmlFor="tour-name"
-                className="block font-body text-sm font-semibold text-text mb-1.5"
+                className="block font-body text-sm font-semibold text-text mb-1.5" data-role="text"
               >
                 Your Name
               </label>
@@ -110,7 +110,7 @@ export function TourFormBlock({ title, body }: BlockProps) {
               <div>
                 <label
                   htmlFor="tour-email"
-                  className="block font-body text-sm font-semibold text-text mb-1.5"
+                  className="block font-body text-sm font-semibold text-text mb-1.5" data-role="text-2"
                 >
                   Email
                 </label>
@@ -126,7 +126,7 @@ export function TourFormBlock({ title, body }: BlockProps) {
               <div>
                 <label
                   htmlFor="tour-phone"
-                  className="block font-body text-sm font-semibold text-text mb-1.5"
+                  className="block font-body text-sm font-semibold text-text mb-1.5" data-role="text-3"
                 >
                   Phone
                 </label>
@@ -144,7 +144,7 @@ export function TourFormBlock({ title, body }: BlockProps) {
               <div>
                 <label
                   htmlFor="tour-date"
-                  className="block font-body text-sm font-semibold text-text mb-1.5"
+                  className="block font-body text-sm font-semibold text-text mb-1.5" data-role="text-4"
                 >
                   Preferred Date
                 </label>
@@ -158,7 +158,7 @@ export function TourFormBlock({ title, body }: BlockProps) {
               <div>
                 <label
                   htmlFor="tour-community"
-                  className="block font-body text-sm font-semibold text-text mb-1.5"
+                  className="block font-body text-sm font-semibold text-text mb-1.5" data-role="text-5"
                 >
                   Community of Interest
                 </label>
@@ -177,10 +177,10 @@ export function TourFormBlock({ title, body }: BlockProps) {
             <div>
               <label
                 htmlFor="tour-message"
-                className="block font-body text-sm font-semibold text-text mb-1.5"
+                className="block font-body text-sm font-semibold text-text mb-1.5" data-role="text-6"
               >
                 Anything we should know?{" "}
-                <span className="font-normal text-muted">(optional)</span>
+                <span className="font-normal text-muted" data-role="text-7">(optional)</span>
               </label>
               <textarea
                 id="tour-message"
@@ -193,12 +193,12 @@ export function TourFormBlock({ title, body }: BlockProps) {
 
             <button
               type="submit"
-              className="w-full rounded-lg bg-primary px-6 py-4 font-heading text-base font-semibold text-background shadow-md hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2"
+              className="w-full rounded-lg bg-primary px-6 py-4 font-heading text-base font-semibold text-background shadow-md hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2" data-role="cta"
             >
               Schedule a Tour
             </button>
 
-            <p className="text-center font-body text-sm text-muted leading-relaxed">
+            <p className="text-center font-body text-sm text-muted leading-relaxed" data-role="subheading-2">
               No commitment — just a friendly visit. We'll confirm your time
               within one business day.
             </p>

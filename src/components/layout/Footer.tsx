@@ -37,10 +37,10 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <h2 className="font-heading text-2xl font-bold text-white">
+            <h2 className="font-heading text-2xl font-bold text-white" data-role="heading">
               {brandName}
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-background/70 max-w-md">
+            <p className="mt-3 text-sm leading-relaxed text-background/70 max-w-md" data-role="subheading">
               {tagline} We&apos;re here to support you and your family through every step of the senior living journey.
             </p>
             <div className="mt-6 space-y-3 text-sm text-background/80">
@@ -68,7 +68,7 @@ export function Footer() {
 
           <div className="lg:col-span-4 grid grid-cols-2 gap-8 sm:grid-cols-3">
             <div>
-              <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4">
+              <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4" data-role="heading-2">
                 Care
               </h3>
               <ul className="space-y-2.5">
@@ -85,7 +85,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4">
+              <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4" data-role="heading-3">
                 Visit
               </h3>
               <ul className="space-y-2.5">
@@ -102,7 +102,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4">
+              <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4" data-role="heading-4">
                 Company
               </h3>
               <ul className="space-y-2.5">
@@ -121,7 +121,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4">
+            <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white mb-4" data-role="heading-5">
               Accreditation
             </h3>
             <div className="flex flex-wrap gap-3">
@@ -140,7 +140,7 @@ export function Footer() {
                 Accredited
               </div>
             </div>
-            <h3 className="mt-6 font-heading text-sm font-bold uppercase tracking-wider text-white mb-3">
+            <h3 className="mt-6 font-heading text-sm font-bold uppercase tracking-wider text-white mb-3" data-role="heading-6">
               Follow
             </h3>
             <div className="flex gap-2">
@@ -170,15 +170,15 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-background/10 pt-6 text-xs text-background/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {year} {brandName}. All rights reserved.</p>
+          <p data-role="text">&copy; {year} {brandName}. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <a href="/privacy-policy" className="hover:text-white transition-colors underline underline-offset-4 decoration-background/20">
+            <a href="/privacy-policy" className="hover:text-white transition-colors underline underline-offset-4 decoration-background/20" data-role="text-2">
               Privacy Policy
             </a>
-            <a href="/terms-of-use" className="hover:text-white transition-colors underline underline-offset-4 decoration-background/20">
+            <a href="/terms-of-use" className="hover:text-white transition-colors underline underline-offset-4 decoration-background/20" data-role="text-3">
               Terms of Use
             </a>
-            <a href="/accessibility" className="hover:text-white transition-colors underline underline-offset-4 decoration-background/20">
+            <a href="/accessibility" className="hover:text-white transition-colors underline underline-offset-4 decoration-background/20" data-role="text-4">
               Accessibility
             </a>
           </div>

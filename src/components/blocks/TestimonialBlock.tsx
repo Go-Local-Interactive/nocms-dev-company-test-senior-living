@@ -112,7 +112,7 @@ export function TestimonialBlock({ title, body }: BlockProps) {
               >
                 <span
                   aria-hidden="true"
-                  className="font-heading absolute top-4 left-6 text-7xl leading-none text-primary/20 select-none"
+                  className="font-heading absolute top-4 left-6 text-7xl leading-none text-primary/20 select-none" data-role="text"
                 >
                   &ldquo;
                 </span>

@@ -31,8 +31,8 @@ export default async function BlogPostPage({ params }: Props) {
   if (slug === "_placeholder") {
     return (
       <div className="mx-auto max-w-2xl px-6 py-16">
-        <h1 className="text-3xl font-semibold tracking-tight">Blog</h1>
-        <p className="mt-4 text-zinc-600">No posts yet.</p>
+        <h1 className="text-3xl font-semibold tracking-tight" data-role="heading-2">Blog</h1>
+        <p className="mt-4 text-zinc-600" data-role="text">No posts yet.</p>
       </div>
     );
   }
@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
       {post.excerpt && (
         <p
           {...payloadFieldAttrs({ collection: "posts", docId: post.id, field: "excerpt" })}
-          className="mt-4 text-lg text-muted"
+          className="mt-4 text-lg text-muted" data-role="subheading-2"
         >
           {post.excerpt}
         </p>

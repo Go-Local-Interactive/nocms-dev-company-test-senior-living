@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "components": {
+    "accordion": {
+      "file": "src/components/blocks/AccordionBlock.tsx",
+      "tag": "section"
+    },
+    "amenity-grid": {
+      "file": "src/components/blocks/AmenityGridBlock.tsx",
+      "tag": "section"
+    },
+    "banner": {
+      "file": "src/components/blocks/Baseline.tsx",
+      "tag": "section"
+    },
+    "crisis-callout": {
+      "file": "src/components/blocks/CalloutBandBlock.tsx",
+      "tag": "section"
+    },
+    "care-level-card": {
+      "file": "src/components/blocks/CareLevelCardBlock.tsx",
+      "tag": "section"
+    },
+    "care-level-grid": {
+      "file": "src/components/blocks/CareLevelGridBlock.tsx",
+      "tag": "section"
+    },
+    "events-list": {
+      "file": "src/components/blocks/EventsListBlock.tsx",
+      "tag": "section"
+    },
+    "floor-plan-card": {
+      "file": "src/components/blocks/FloorPlanCardBlock.tsx",
+      "tag": "section"
+    },
+    "floor-plan-grid": {
+      "file": "src/components/blocks/FloorPlanGridBlock.tsx",
+      "tag": "section"
+    },
+    "gallery": {
+      "file": "src/components/blocks/GalleryBlock.tsx",
+      "tag": "section"
+    },
+    "hero": {
+      "file": "src/components/blocks/HeroBlock.tsx",
+      "tag": "section"
+    },
+    "lexical": {
+      "file": "src/components/blocks/Lexical.tsx",
+      "tag": "div"
+    },
+    "render-blocks": {
+      "file": "src/components/blocks/RenderBlocks.tsx",
+      "tag": "div"
+    },
+    "stats-bar": {
+      "file": "src/components/blocks/StatsBarBlock.tsx",
+      "tag": "section"
+    },
+    "team-grid": {
+      "file": "src/components/blocks/TeamGridBlock.tsx",
+      "tag": "section"
+    },
+    "testimonial": {
+      "file": "src/components/blocks/TestimonialBlock.tsx",
+      "tag": "section"
+    },
+    "timeline": {
+      "file": "src/components/blocks/TimelineBlock.tsx",
+      "tag": "section"
+    },
+    "tour-form": {
+      "file": "src/components/blocks/TourFormBlock.tsx",
+      "tag": "section"
+    },
+    "content/cta-banner": {
+      "file": "src/components/content/CTABanner.tsx",
+      "tag": "section"
+    },
+    "content/care-cards": {
+      "file": "src/components/content/CareCards.tsx",
+      "tag": "SectionWrapper"
+    },
+    "content/contact-form": {
+      "file": "src/components/content/ContactForm.tsx",
+      "tag": "div"
+    },
+    "content/faq-accordion": {
+      "file": "src/components/content/FaqAccordion.tsx",
+      "tag": "section"
+    },
+    "content/photo-grid": {
+      "file": "src/components/content/PhotoGrid.tsx",
+      "tag": "section"
+    },
+    "content/pricing-cards": {
+      "file": "src/components/content/PricingCards.tsx",
+      "tag": "section"
+    },
+    "content/resource-cards": {
+      "file": "src/components/content/ResourceCards.tsx",
+      "tag": "section"
+    },
+    "content/stats-bar": {
+      "file": "src/components/content/StatsBar.tsx",
+      "tag": "section"
+    },
+    "content/team-grid": {
+      "file": "src/components/content/TeamGrid.tsx",
+      "tag": "section"
+    },
+    "content/testimonials": {
+      "file": "src/components/content/Testimonials.tsx",
+      "tag": "section"
+    },
+    "content/why-section": {
+      "file": "src/components/content/WhySection.tsx",
+      "tag": "section"
+    },
+    "exit-intent": {
+      "file": "src/components/layout/ExitIntent.tsx",
+      "tag": "div"
+    },
+    "site-footer": {
+      "file": "src/components/layout/Footer.tsx",
+      "tag": "footer"
+    },
+    "site-header": {
+      "file": "src/components/layout/Header.tsx",
+      "tag": "header"
+    },
+    "help-badge": {
+      "file": "src/components/layout/HelpBadge.tsx",
+      "tag": "a"
+    },
+    "layout/page-hero": {
+      "file": "src/components/layout/PageHero.tsx",
+      "tag": "section"
+    },
+    "layout/section-wrapper": {
+      "file": "src/components/layout/SectionWrapper.tsx",
+      "tag": "section"
+    },
+    "ui/badge": {
+      "file": "src/components/ui/Badge.tsx",
+      "tag": "span"
+    },
+    "ui/button": {
+      "file": "src/components/ui/Button.tsx",
+      "tag": "a"
+    },
+    "ui/motion-wrapper": {
+      "file": "src/components/ui/MotionWrapper.tsx",
+      "tag": "div"
+    }
+  },
+  "pages": {}
+}

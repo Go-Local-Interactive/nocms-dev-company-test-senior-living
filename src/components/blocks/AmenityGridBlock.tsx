@@ -154,7 +154,7 @@ export function AmenityGridBlock({ title, body, mediaArray }: BlockProps) {
                     src={photoSrc}
                     alt={mediaAlt(photo) || a.name}
                     className="w-full aspect-[4/3] object-cover"
-                    loading="lazy"
+                    loading="lazy" data-role="media"
                   />
                 ) : null}
                 <div className="p-7 text-center">
@@ -166,10 +166,10 @@ export function AmenityGridBlock({ title, body, mediaArray }: BlockProps) {
                       <span className="h-8 w-8 block">{a.icon}</span>
                     </div>
                   )}
-                  <h3 className="font-heading text-xl font-semibold text-text mb-2">
+                  <h3 className="font-heading text-xl font-semibold text-text mb-2" data-role="heading-2">
                     {a.name}
                   </h3>
-                  <p className="font-body text-sm text-muted leading-relaxed">
+                  <p className="font-body text-sm text-muted leading-relaxed" data-role="subheading-2">
                     {a.description}
                   </p>
                 </div>

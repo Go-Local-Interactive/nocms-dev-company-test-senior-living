@@ -20,7 +20,7 @@ export function HelpBadge() {
         <span className="absolute inset-[-4px] rounded-full border-2 border-white/40 animate-ping" aria-hidden="true" />
         <Phone className="relative h-5 w-5" aria-hidden="true" />
       </span>
-      <span className="hidden sm:inline">Need Help?</span>
+      <span className="hidden sm:inline" data-role="text">Need Help?</span>
     </a>
   );
 }

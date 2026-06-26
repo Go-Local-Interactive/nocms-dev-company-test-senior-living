@@ -45,7 +45,7 @@ export function HeroBlock({ title, body, media }: BlockProps) {
           src={bg}
           alt={mediaAlt(media)}
           className="absolute inset-0 z-0 h-full w-full object-cover"
-          loading="eager"
+          loading="eager" data-role="media"
         />
       ) : null}
       {showMedia && (
@@ -90,7 +90,7 @@ export function HeroBlock({ title, body, media }: BlockProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
             <a
               href="/schedule-tour"
-              className="inline-flex items-center justify-center bg-accent text-text font-semibold px-8 py-4 rounded-xl text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all min-w-[240px]"
+              className="inline-flex items-center justify-center bg-accent text-text font-semibold px-8 py-4 rounded-xl text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all min-w-[240px]" data-role="cta"
             >
               Schedule a Tour
             </a>
@@ -113,7 +113,7 @@ export function HeroBlock({ title, body, media }: BlockProps) {
               method="get"
               className="mt-10 flex flex-col sm:flex-row items-stretch gap-3 max-w-xl mx-auto bg-white/95 rounded-lg p-2 shadow-2xl"
             >
-              <label htmlFor="hero-search" className="sr-only">
+              <label htmlFor="hero-search" className="sr-only" data-role="text">
                 City or ZIP code
               </label>
               <input
@@ -125,7 +125,7 @@ export function HeroBlock({ title, body, media }: BlockProps) {
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center bg-primary text-white font-semibold px-6 py-3 rounded-md hover:opacity-90 transition"
+                className="inline-flex items-center justify-center bg-primary text-white font-semibold px-6 py-3 rounded-md hover:opacity-90 transition" data-role="cta-2"
               >
                 Find Community
               </button>

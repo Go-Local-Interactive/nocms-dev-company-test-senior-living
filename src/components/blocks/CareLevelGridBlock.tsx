@@ -134,7 +134,7 @@ export function CareLevelGridBlock({ title, body, mediaArray }: BlockProps) {
                     src={photoSrc}
                     alt={mediaAlt(photo) || care.title}
                     className="w-full aspect-[4/3] object-cover"
-                    loading="lazy"
+                    loading="lazy" data-role="media"
                   />
                 ) : (
                   <div
@@ -144,18 +144,18 @@ export function CareLevelGridBlock({ title, body, mediaArray }: BlockProps) {
                   />
                 )}
                 <div className="p-6">
-                  <h3 className="font-heading text-2xl font-semibold text-text mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-heading text-2xl font-semibold text-text mb-2 group-hover:text-primary transition-colors" data-role="heading-2">
                     {care.title}
                   </h3>
-                  <p className="font-body text-sm text-muted leading-relaxed">
+                  <p className="font-body text-sm text-muted leading-relaxed" data-role="subheading-2">
                     {care.description}
                   </p>
                   <span
                     aria-hidden="true"
-                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity" data-role="text"
                   >
                     Learn more
-                    <span aria-hidden="true">&rarr;</span>
+                    <span aria-hidden="true" data-role="text-2">&rarr;</span>
                   </span>
                 </div>
               </a>
