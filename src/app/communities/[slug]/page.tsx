@@ -10,6 +10,10 @@ import skinConfig from "@/skin.config";
 type Params = { slug: string };
 type Props = { params: Promise<Params> };
 
+// NOTE (Plan 08): the Golden Oaks mockup has NO per-community page (floor-plan
+// layouts live under /floor-plans/[slug]). This data-driven route renders the
+// single seeded `main-community` (Plan 08 Task 3) so the nav link isn't dead,
+// but it is NOT a 1:1 mockup target — P9 should not flag it against a mockup.
 export async function generateStaticParams(): Promise<Params[]> {
   // Payload `Locations` is shared across verticals. Filter to `type: "single"`
   // entries — those are individual communities (not city/state aggregators).

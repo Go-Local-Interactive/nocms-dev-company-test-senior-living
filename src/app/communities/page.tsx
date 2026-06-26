@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default async function CommunitiesIndexPage() {
+  // NOTE (Plan 08): the Golden Oaks mockup has NO community-list / per-community
+  // page — apartment layouts live under /floor-plans. This data-driven route is
+  // kept so the seeded single `main-community` (Plan 08 Task 3) has a home and
+  // the nav link isn't dead, but it is NOT a 1:1 mockup target — P9 should not
+  // flag it against any mockup file.
+  //
   // Payload is the source of truth for which communities exist. The
   // `Locations` collection is shared across verticals — `type: "single"`
   // entries are individual communities (vs. city/state aggregators).

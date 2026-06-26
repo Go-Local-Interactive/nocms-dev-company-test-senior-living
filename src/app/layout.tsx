@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { HelpBadge } from "@/components/layout/HelpBadge";
-import { ExitIntent } from "@/components/layout/ExitIntent";
+import {
+  SiteHeaderSlot,
+  SiteFooterSlot,
+  GlobalWidgetsSlot,
+} from "@/components/layout/SiteChrome.client";
 
 export const metadata: Metadata = {
   title: { default: "Test Senior Living", template: "%s | Test Senior Living" },
@@ -22,7 +23,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        {/* Brand fonts — Libre Baskerville (headings) + Open Sans (body),
+            matching the Golden Oaks mockup. Swapped per brand via the
+            --font-heading / --font-body tokens in globals.css @theme. */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+          rel="stylesheet"
+        />
         {editorOrigin && (
           <script async src={`${editorOrigin}/nocms/nocms-inspector.js`} />
         )}
@@ -34,11 +43,11 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Header />
+        <SiteHeaderSlot />
         <main id="main-content">{children}</main>
-        <Footer />
-        <HelpBadge />
-        <ExitIntent />
+        <SiteFooterSlot />
+        {/* Floating chrome — suppressed on minimal-chrome routes (see slot). */}
+        <GlobalWidgetsSlot />
       </body>
     </html>
   );

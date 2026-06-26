@@ -132,3 +132,50 @@ export function lexicalQAPairs(value?: LexicalRoot | null): Array<{ q: string; a
   }
   return pairs;
 }
+
+export interface LexicalQACategory {
+  category: string;
+  items: Array<{ q: string; a: string }>;
+}
+
+/** Group QA pairs by category for the tabbed FAQ. A top-level `h2` opens a new
+ *  category (its text = the category label); any other heading (`h3`+) is a
+ *  question whose following `paragraph` is the answer. Questions seen before
+ *  the first `h2` (or when the body has no `h2` at all) collect under a single
+ *  unlabeled category (`""`), which the renderer treats as "All". Mirrors the
+ *  mockup's `window.tabbedAccordionData` shape (category → items[]). */
+export function lexicalQACategories(
+  value?: LexicalRoot | null,
+): LexicalQACategory[] {
+  if (!value?.root?.children) return [];
+  const groups: LexicalQACategory[] = [];
+  let current: LexicalQACategory | null = null;
+  let pendingQ: string | null = null;
+
+  const ensure = (label: string): LexicalQACategory => {
+    if (current && current.category === label) return current;
+    const found = groups.find((g) => g.category === label);
+    if (found) {
+      current = found;
+      return found;
+    }
+    const next: LexicalQACategory = { category: label, items: [] };
+    groups.push(next);
+    current = next;
+    return next;
+  };
+
+  for (const node of value.root.children) {
+    if (node.type === "heading" && (node.tag as string) === "h2") {
+      current = ensure(nodeToText(node));
+      pendingQ = null;
+    } else if (node.type === "heading") {
+      pendingQ = nodeToText(node);
+    } else if (node.type === "paragraph" && pendingQ != null) {
+      const group = current ?? ensure("");
+      group.items.push({ q: pendingQ, a: nodeToText(node) });
+      pendingQ = null;
+    }
+  }
+  return groups.filter((g) => g.items.length > 0);
+}

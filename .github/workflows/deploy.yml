@@ -27,11 +27,11 @@ jobs:
         # prod build-time origin; the *.pages.dev URL matches project.publishedUrl.
         run: bun run build
         env:
-          SITE_URL: https://nocms-dev-company-test-senior-living-1e90f60e.pages.dev
+          SITE_URL: https://nocms-dev-company-test-senior-living-ab7d36c9.pages.dev
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy out --project-name=nocms-dev-company-test-senior-living-1e90f60e
+          command: pages deploy out --project-name=nocms-dev-company-test-senior-living-ab7d36c9

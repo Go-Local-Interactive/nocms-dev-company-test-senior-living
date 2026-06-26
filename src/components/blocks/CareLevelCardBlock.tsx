@@ -19,7 +19,12 @@ import type { LexicalNode, LexicalRoot } from "./types";
  *      • Everything else (paragraphs, headings) renders as the descriptive
  *        prose below the heading.
  *    - CTAs are fixed: primary "Schedule a Tour" → /schedule-tour,
- *      secondary "Explore Living Options" → /living-options. */
+ *      secondary "Explore Living Options" → /living-options.
+ *
+ *  Variant (`settings.variant`):
+ *    - unset → media-left / text-right (the default).
+ *    - "split" → reads reversed (media-right / text-left) so alternating
+ *      care-type sections can flip sides like the mockup feature-sections. */
 
 function nodeToText(n: LexicalNode): string {
   const out: string[] = [];
@@ -53,16 +58,28 @@ function extractFeaturesAndProse(body: LexicalRoot | null | undefined): {
   return { features, prose };
 }
 
-export function CareLevelCardBlock({ title, body, media }: BlockProps) {
-  const photo = mediaUrl(media);
+/** In-code GO default photo for this single-image, per-page block. The mockup
+ *  image is page-specific (assisted/memory/respite …), so the seed can set a
+ *  per-page `settings.image`; the renderer resolves uploaded media →
+ *  `settings.image` → this generic care default so it is never blank. */
+const CARE_CARD_DEFAULT_IMAGE = "/golden-oaks/care-health.jpg";
+
+export function CareLevelCardBlock({ title, body, media, settings }: BlockProps) {
+  // Uploaded media wins, then per-page `settings.image`, then the GO default.
+  const photo = mediaUrl(media) || settings?.image || CARE_CARD_DEFAULT_IMAGE;
   const { features, prose } = extractFeaturesAndProse(body);
+  const split = settings?.variant === "split";
 
   return (
     <section
       data-nocms-component="care-level-card"
       className="py-20 px-6 sm:px-10 lg:px-16 bg-background"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <div
+        className={`max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start ${
+          split ? "lg:[&>div:first-child]:order-2" : ""
+        }`}
+      >
         <div className="relative">
           {photo ? (
             /* eslint-disable-next-line @next/next/no-img-element */
@@ -70,14 +87,14 @@ export function CareLevelCardBlock({ title, body, media }: BlockProps) {
               data-payload-subfield="media"
               src={photo}
               alt={mediaAlt(media) || title || "Care level"}
-              className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg"
+              className="w-full aspect-[4/3] object-cover rounded-[--radius] shadow-lg"
               loading="eager" data-role="media"
             />
           ) : (
             <div
               data-payload-subfield="media"
               aria-hidden="true"
-              className="w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/15 via-surface to-accent/20"
+              className="w-full aspect-[4/3] rounded-[--radius] bg-gradient-to-br from-primary/15 via-surface to-accent/20"
             />
           )}
         </div>
@@ -86,7 +103,7 @@ export function CareLevelCardBlock({ title, body, media }: BlockProps) {
             <h1
               data-role="heading"
               data-payload-subfield="title"
-              className="font-heading text-4xl sm:text-5xl font-bold text-text tracking-tight mb-4"
+              className="font-heading text-[2.5rem] sm:text-[3.5rem] font-bold leading-[1.1] text-text tracking-tight mb-4"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
               {title}
@@ -102,7 +119,7 @@ export function CareLevelCardBlock({ title, body, media }: BlockProps) {
           {features.length > 0 && (
             <ul
               data-payload-subfield="body"
-              className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8 p-5 rounded-xl bg-surface border border-text/5"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8 p-5 rounded-[--radius] bg-surface border border-text/5"
             >
               {features.map((feature, i) => (
                 <li
@@ -122,13 +139,13 @@ export function CareLevelCardBlock({ title, body, media }: BlockProps) {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <a
               href="/schedule-tour"
-              className="inline-flex items-center justify-center bg-accent text-text font-semibold px-8 py-4 rounded-xl text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all" data-role="cta"
+              className="inline-flex items-center justify-center bg-secondary text-white font-semibold px-8 py-4 rounded-[--radius] text-base shadow-lg hover:bg-secondary-dark hover:shadow-xl hover:-translate-y-0.5 transition-all" data-role="cta"
             >
               Schedule a Tour
             </a>
             <a
               href="/living-options"
-              className="inline-flex items-center justify-center border-2 border-text/20 text-text hover:bg-surface font-medium px-8 py-4 rounded-xl text-base transition-all" data-role="text"
+              className="inline-flex items-center justify-center border-2 border-text/20 text-text hover:bg-surface font-medium px-8 py-4 rounded-[--radius] text-base transition-all" data-role="text"
             >
               Explore Living Options
             </a>

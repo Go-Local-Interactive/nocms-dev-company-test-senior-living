@@ -19,6 +19,9 @@ interface Member {
   name: string;
   role: string;
   bio: string;
+  /** In-code GO default portrait (`public/golden-oaks/{leader,team}-*.jpg`),
+   *  used when `mediaArray[i]` carries no uploaded ref. */
+  image: string;
 }
 
 const DEFAULT_MEMBERS: Member[] = [
@@ -26,22 +29,38 @@ const DEFAULT_MEMBERS: Member[] = [
     name: "Margaret Whitfield",
     role: "Executive Director",
     bio: "Twenty-five years guiding senior communities — Margaret leads with the calm certainty families lean on during life's biggest transitions.",
+    image: "/golden-oaks/leader-linda-nakamura.jpg",
   },
   {
     name: "Dr. James Okafor",
     role: "Medical Director",
     bio: "Board-certified geriatrician partnering with residents and families on care plans that prioritize dignity, comfort, and independence.",
+    image: "/golden-oaks/leader-james-whitfield.jpg",
   },
   {
     name: "Rosa Delgado",
     role: "Director of Nursing",
     bio: "Leads our 24/7 nursing team with the same hands-on warmth she brings to every resident — bedside, hallway, or family meeting.",
+    image: "/golden-oaks/team-rosa-gutierrez.jpg",
   },
   {
     name: "Thomas Beckett",
     role: "Director of Life Enrichment",
     bio: "Curates a calendar that goes beyond bingo — pottery, jazz nights, gardening clubs, and trips that keep residents engaged with the wider world.",
+    image: "/golden-oaks/team-tom-brennan.jpg",
   },
+];
+
+/** Portrait cycle for body-overridden members beyond the 4 defaults. */
+const DEFAULT_MEMBER_IMAGES = [
+  "/golden-oaks/leader-linda-nakamura.jpg",
+  "/golden-oaks/leader-james-whitfield.jpg",
+  "/golden-oaks/team-rosa-gutierrez.jpg",
+  "/golden-oaks/team-tom-brennan.jpg",
+  "/golden-oaks/team-sarah-mitchell.jpg",
+  "/golden-oaks/team-marcus-brown.jpg",
+  "/golden-oaks/team-anita-desai.jpg",
+  "/golden-oaks/team-david-park.jpg",
 ];
 
 const ROLE_SPLIT_RE = /\s+[—–-]\s+/;
@@ -60,9 +79,11 @@ export function TeamGridBlock({ title, body, mediaArray }: BlockProps) {
 
   const members: Member[] = hasOverrides
     ? overrides.map((o, i) => {
-        const fallback = DEFAULT_MEMBERS[i] ?? { name: "", role: "", bio: "" };
+        const fallback =
+          DEFAULT_MEMBERS[i] ??
+          { name: "", role: "", bio: "", image: DEFAULT_MEMBER_IMAGES[i % DEFAULT_MEMBER_IMAGES.length] };
         const { name, role } = parseHeading(o.q, fallback);
-        return { name, role, bio: o.a || fallback.bio };
+        return { name, role, bio: o.a || fallback.bio, image: fallback.image };
       })
     : DEFAULT_MEMBERS;
 
@@ -102,7 +123,9 @@ export function TeamGridBlock({ title, body, mediaArray }: BlockProps) {
         >
           {members.map((m, i) => {
             const photo = photos[i];
-            const photoSrc = mediaUrl(photo);
+            // Uploaded ref wins; else the in-code GO default portrait for this
+            // slot (`||`, not `??`, so an empty/missing ref falls through).
+            const photoSrc = mediaUrl(photo) || m.image;
             return (
               <article
                 key={i}

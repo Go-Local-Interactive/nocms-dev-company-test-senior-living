@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
-  <g fill="none" stroke="#5F7A5E" stroke-width="1.2" stroke-linecap="round" >
+  <g fill="none" stroke="#5F7A5E" stroke-width="1.2" stroke-linecap="round" opacity="0.13">
 
     <!-- Curling vine 1 — S-curve with tight curls -->
     <path d="M0 500 Q40 460 80 440 Q140 410 180 360 Q210 320 200 270 Q190 230 220 200 Q260 170 280 200 Q300 240 280 280 Q260 310 300 340 Q350 370 400 340 Q440 310 430 260 Q420 220 460 200 Q510 180 540 220 Q570 260 600 300"/>

@@ -3,17 +3,32 @@ import type { BlockProps } from "./types";
 import { mediaUrl, mediaAlt } from "@/lib/payload";
 import { lexicalToText, lexicalQAPairs } from "./Lexical";
 
-/** AmenityGridBlock — 3-column grid of community amenities (dining, library,
- *  garden, fitness, etc.). Modeled on amber-hollow's `icon-card-grid` (light
- *  variant) — each card centers an icon-circle above a title + description.
- *  Per-card accent colors cycle so the grid reads as a varied set, not a
- *  uniform stack.
+/** AmenityGridBlock — the Golden Oaks icon-card grid of community amenities
+ *  (dining, library, garden, fitness, etc.). Each card centers a circular icon
+ *  (or a photo) above a serif title + muted description on a token surface card
+ *  that lifts on hover. Mirrors the mockup `.icon-cards` family (Plan 00); the
+ *  per-card accent tint cycles so the grid reads as a varied set.
  *
- *  Data-flow convention:
+ *  ONE block, two layouts via `settings.variant` and a section-bg switch via
+ *  `settings.background` (one block, NOT N):
+ *    - `variant: "icon"`  — DEFAULT. Circular accent-tinted icon at the top of
+ *                           each card; `mediaArray[i]` (if present) still
+ *                           photo-replaces the icon for that card.
+ *    - `variant: "image"` — photo-topped cards (4:3 image well, no icon). The
+ *                           `mediaArray[i]` photo fills the well; a token
+ *                           gradient stands in when a card has no photo.
+ *    - `settings.background` ∈ {base, surface (default), dark, accent} — swaps
+ *                           the section band + text color. `dark` →
+ *                           `--color-section-dark` (green) with white titles +
+ *                           lighter body (matches the `feature-sections-dark` /
+ *                           `icon-cards-brown` placements). Token-only.
+ *
+ *  Data-flow convention (UNCHANGED across the re-skin):
  *    - Each heading/paragraph pair in the body is one amenity: h3 = name,
  *      paragraph = description.
- *    - `mediaArray[i]` is an optional photo for amenity i — if provided, it
- *      replaces the icon circle with a square image at the top of the card.
+ *    - `mediaArray[i]` is an optional photo for amenity i — in the `icon`
+ *      variant it replaces the icon circle; in the `image` variant it fills the
+ *      card's image well.
  *    - Empty body falls back to 6 default amenities. */
 
 interface Amenity {
@@ -69,6 +84,19 @@ const DEFAULT_AMENITIES: Amenity[] = [
   { name: "Salon & Spa", description: "On-site hair, nail, and spa services so residents never have to leave the community to feel pampered.", icon: ICONS.spa },
 ];
 
+/** In-code GO default photos for the `image`-variant card wells
+ *  (`public/golden-oaks/life-*.jpg`), bound per card index when `mediaArray[i]`
+ *  has no uploaded ref. The default `icon` variant keeps its icon circle (these
+ *  are only used when the card actually leads with a photo well). */
+const DEFAULT_IMAGES = [
+  "/golden-oaks/life-dining.jpg",
+  "/golden-oaks/life-arts.jpg",
+  "/golden-oaks/life-gardens.jpg",
+  "/golden-oaks/life-fitness.jpg",
+  "/golden-oaks/life-celebrations.jpg",
+  "/golden-oaks/life-community.jpg",
+];
+
 function pickIcon(name: string): React.ReactNode {
   const n = name.toLowerCase();
   if (n.includes("dining") || n.includes("restaurant") || n.includes("cafe")) return ICONS.dining;
@@ -80,6 +108,9 @@ function pickIcon(name: string): React.ReactNode {
   return ICONS.default;
 }
 
+/** Per-card icon-circle accent tint, cycled by index. Token-only (a token bg at
+ *  an opacity + a token text color) so the `--color-primary` flip re-themes the
+ *  whole set. On a dark section the tint is a translucent wash of the accent. */
 const ACCENT_TINTS = [
   "bg-primary/10 text-primary",
   "bg-accent/15 text-accent",
@@ -88,8 +119,36 @@ const ACCENT_TINTS = [
   "bg-accent/15 text-accent",
   "bg-secondary/15 text-secondary",
 ];
+const ACCENT_TINTS_DARK = [
+  "bg-primary-light/15 text-primary-light",
+  "bg-accent/20 text-accent-light",
+  "bg-secondary/20 text-secondary-light",
+  "bg-primary-light/15 text-primary-light",
+  "bg-accent/20 text-accent-light",
+  "bg-secondary/20 text-secondary-light",
+];
 
-export function AmenityGridBlock({ title, body, mediaArray }: BlockProps) {
+type Background = "base" | "surface" | "dark" | "accent";
+
+/** Section band + text-color classes per `settings.background`. The band is
+ *  always a token utility — never a literal. `dark` flips titles/body to white. */
+const SECTION_BG: Record<Background, string> = {
+  base: "bg-background",
+  surface: "bg-surface",
+  dark: "bg-section-dark text-white",
+  accent: "bg-section-sand",
+};
+
+function resolveBackground(b: string | null | undefined): Background {
+  if (b === "base" || b === "dark" || b === "accent") return b;
+  return "surface";
+}
+
+export function AmenityGridBlock({ title, body, mediaArray, settings }: BlockProps) {
+  const imageVariant = settings?.variant === "image";
+  const background = resolveBackground(settings?.background);
+  const dark = background === "dark";
+
   const overrides = lexicalQAPairs(body);
   const hasOverrides = overrides.length > 0;
   const intro = hasOverrides ? undefined : lexicalToText(body) || undefined;
@@ -103,10 +162,23 @@ export function AmenityGridBlock({ title, body, mediaArray }: BlockProps) {
       })
     : DEFAULT_AMENITIES;
 
+  const tints = dark ? ACCENT_TINTS_DARK : ACCENT_TINTS;
+
+  // Token-only card surface + text. On dark the card is a translucent-white
+  // panel with white heading + lighter body; on light it's the background
+  // surface with the standard text/muted treatment.
+  const cardCls = dark
+    ? "bg-white/[0.06] border-white/15"
+    : "bg-background border-text/5";
+  const headingCls = dark ? "text-white" : "text-text";
+  const bodyCls = dark ? "text-white/85" : "text-muted";
+
   return (
     <section
       data-nocms-component="amenity-grid"
-      className="py-20 px-6 sm:px-10 lg:px-16 bg-surface"
+      data-variant={imageVariant ? "image" : "icon"}
+      data-background={background}
+      className={`py-20 px-6 sm:px-10 lg:px-16 ${SECTION_BG[background]}`}
     >
       <div className="max-w-7xl mx-auto">
         {(title || intro) && (
@@ -115,7 +187,7 @@ export function AmenityGridBlock({ title, body, mediaArray }: BlockProps) {
               <h2
                 data-role="heading"
                 data-payload-subfield="title"
-                className="font-heading text-4xl sm:text-5xl font-bold text-text tracking-tight"
+                className={`font-heading text-4xl sm:text-5xl font-bold tracking-tight ${headingCls}`}
                 style={{ textWrap: "balance" } as React.CSSProperties}
               >
                 {title}
@@ -125,7 +197,7 @@ export function AmenityGridBlock({ title, body, mediaArray }: BlockProps) {
               <p
                 data-role="subheading"
                 data-payload-subfield="body"
-                className="mt-4 font-body text-lg text-muted leading-relaxed"
+                className={`mt-4 font-body text-lg leading-relaxed ${bodyCls}`}
               >
                 {intro}
               </p>
@@ -135,41 +207,62 @@ export function AmenityGridBlock({ title, body, mediaArray }: BlockProps) {
         <div
           data-array-prop="mediaArray"
           data-payload-subfield="mediaArray"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 min-[769px]:grid-cols-2 min-[1025px]:grid-cols-3 gap-6"
         >
           {amenities.map((a, i) => {
             const photo = photos[i];
             const photoSrc = mediaUrl(photo);
-            const tint = ACCENT_TINTS[i % ACCENT_TINTS.length];
+            // The `image` variant always shows a photo well: uploaded ref wins,
+            // else the in-code GO default for card i (`||`, not `??`). The icon
+            // variant only photo-replaces the icon when a ref is actually
+            // present (an empty card keeps its icon circle), so it does NOT use
+            // the default photo.
+            const wellSrc = photoSrc || DEFAULT_IMAGES[i % DEFAULT_IMAGES.length];
+            const tint = tints[i % tints.length];
+            // In the `image` variant the card always leads with a media well;
+            // in the default `icon` variant a photo (when present) replaces the
+            // icon circle for that card.
+            const showImageWell = imageVariant;
+            const showPhotoForIcon = !imageVariant && !!photoSrc;
             return (
               <article
                 key={i}
                 data-array-index={i}
-                className="group bg-background rounded-2xl border border-text/5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                className={`group rounded-[--radius] border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden ${cardCls}`}
               >
-                {photoSrc ? (
+                {showImageWell ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img
                     data-payload-subfield={`mediaArray.${i}`}
-                    src={photoSrc}
+                    src={wellSrc}
                     alt={mediaAlt(photo) || a.name}
-                    className="w-full aspect-[4/3] object-cover"
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     loading="lazy" data-role="media"
                   />
                 ) : null}
                 <div className="p-7 text-center">
-                  {!photoSrc && (
-                    <div
-                      data-payload-subfield={`mediaArray.${i}`}
-                      className={`mx-auto mb-5 h-16 w-16 rounded-full flex items-center justify-center ${tint}`}
-                    >
-                      <span className="h-8 w-8 block">{a.icon}</span>
-                    </div>
-                  )}
-                  <h3 className="font-heading text-xl font-semibold text-text mb-2" data-role="heading-2">
+                  {!imageVariant &&
+                    (showPhotoForIcon ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        data-payload-subfield={`mediaArray.${i}`}
+                        src={photoSrc}
+                        alt={mediaAlt(photo) || a.name}
+                        className="mx-auto mb-5 h-16 w-16 rounded-full object-cover"
+                        loading="lazy" data-role="media-2"
+                      />
+                    ) : (
+                      <div
+                        data-payload-subfield={`mediaArray.${i}`}
+                        className={`mx-auto mb-5 h-16 w-16 rounded-full flex items-center justify-center ${tint}`}
+                      >
+                        <span className="h-8 w-8 block">{a.icon}</span>
+                      </div>
+                    ))}
+                  <h3 className={`font-heading text-xl font-semibold mb-2 ${headingCls}`} data-role="heading-2">
                     {a.name}
                   </h3>
-                  <p className="font-body text-sm text-muted leading-relaxed" data-role="subheading-2">
+                  <p className={`font-body text-sm leading-relaxed ${bodyCls}`}>
                     {a.description}
                   </p>
                 </div>
